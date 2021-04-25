@@ -13,22 +13,15 @@ namespace JetBrains.ReSharper.Plugins.Spring.Spring
 {
     public class SpringTokenType : TokenNodeType
     {
-        // TODO: change token && name
         public static readonly SpringTokenType Unknown = new SpringTokenType("Unknown", 0);
-        
-        public static readonly SpringTokenType Number = new SpringTokenType("Number", 1);
-        public static readonly SpringTokenType Whitespace = new SpringTokenType("Whitespace", 2);
-        public static readonly SpringTokenType Keyword = new SpringTokenType("Keyword", 3);
-        public static readonly SpringTokenType Identifier = new SpringTokenType("Identifier", 5);
-        public static readonly SpringTokenType Comment = new SpringTokenType("Comment", 4);
-
-        public static readonly SpringTokenType SingleSpecialCharacter = new SpringTokenType("SSC", 8);
-
-
-        // public static readonly SpringTokenType SingleSymbol = new SpringTokenType("SYMBOL", 3);
-        // public static readonly SpringTokenType PairSymbol = new SpringTokenType("PAIR_SYMBOL", 3);
-        public static readonly SpringTokenType StringLiteral = new SpringTokenType("STRING_LITERAL", 6);
-        public static readonly SpringTokenType ConstantLiteral = new SpringTokenType("CONSTANT_LITERAL", 7);
+        public static readonly SpringTokenType Whitespace = new SpringTokenType("Whitespace", 1);
+        public static readonly SpringTokenType Keyword = new SpringTokenType("Keyword", 2);
+        public static readonly SpringTokenType Identifier = new SpringTokenType("Identifier", 3);
+        public static readonly SpringTokenType Number = new SpringTokenType("Number", 4);
+        public static readonly SpringTokenType Comment = new SpringTokenType("Comment", 5);
+        public static readonly SpringTokenType SingleSpecialCharacter = new SpringTokenType("SingleSpecialCharacter", 6);
+        public static readonly SpringTokenType PairSpecialCharacter = new SpringTokenType("PairSpecialCharacter", 7);
+        public static readonly SpringTokenType StringLiteral = new SpringTokenType("StringLiteral", 8);
 
         public SpringTokenType(string s, int index) : base(s, index)
         {
@@ -51,11 +44,9 @@ namespace JetBrains.ReSharper.Plugins.Spring.Spring
 
         public override bool IsKeyword => this == Keyword;
         public override bool IsWhitespace => this == Whitespace;
-
-
-        public override bool IsStringLiteral => this == Number;
+        public override bool IsStringLiteral => this == StringLiteral;
         public override bool IsIdentifier => this == Identifier;
-        public override bool IsConstantLiteral => this == ConstantLiteral;
+        public override bool IsConstantLiteral => this == Number || this == StringLiteral;
         public override bool IsComment => this == Comment;
 
         public override string TokenRepresentation => base.ToString();

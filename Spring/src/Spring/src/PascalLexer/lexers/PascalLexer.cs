@@ -86,12 +86,26 @@ namespace JetBrains.ReSharper.Plugins.Spring.PascalLexer.lexers
 
                 return _lexeme.Kind switch
                 {
-                    LexemeKind.Identifier => SpringTokenType.Keyword,
-                    
+                    LexemeKind.Whitespace => SpringTokenType.Whitespace,
+
+                    LexemeKind.Keyword => SpringTokenType.Keyword,
+                    LexemeKind.Identifier => SpringTokenType.Identifier,
+
+                    LexemeKind.BinaryNumber => SpringTokenType.Number,
+                    LexemeKind.OctalNumber => SpringTokenType.Number,
+                    LexemeKind.HexNumber => SpringTokenType.Number,
                     LexemeKind.Integer => SpringTokenType.Number,
                     LexemeKind.Real => SpringTokenType.Number,
+
+                    LexemeKind.SingleComment => SpringTokenType.Comment,
+                    LexemeKind.MultipleComment => SpringTokenType.Comment,
+
                     LexemeKind.SingleSpecialCharacter => SpringTokenType.SingleSpecialCharacter,
-                    LexemeKind.Whitespace => SpringTokenType.Whitespace,
+                    LexemeKind.PairSpecialCharacter => SpringTokenType.PairSpecialCharacter,
+
+                    LexemeKind.ControlString => SpringTokenType.StringLiteral,
+                    LexemeKind.QuotedString => SpringTokenType.StringLiteral,
+
                     _ => SpringTokenType.Unknown
                 };
             }
