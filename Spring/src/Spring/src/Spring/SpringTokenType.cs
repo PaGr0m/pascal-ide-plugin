@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using System.Linq;
 using System.Text;
 using JetBrains.ReSharper.Feature.Services.Html;
@@ -30,6 +28,7 @@ namespace JetBrains.ReSharper.Plugins.Spring.Spring
         public override LeafElementBase Create(IBuffer buffer, TreeOffset startOffset, TreeOffset endOffset)
         {
             return new LeafElement(
+                this,
                 new StringBuffer(
                     string.Concat(
                         buffer
@@ -37,9 +36,13 @@ namespace JetBrains.ReSharper.Plugins.Spring.Spring
                             .Skip(startOffset.Offset)
                             .Take(endOffset.Offset - startOffset.Offset)
                     )
-                ),
-                this
+                )
             );
+
+            // return new LeafElement(
+            //     buffer.GetText(new TextRange(startOffset.Offset, endOffset.Offset)),
+            //     this
+            //     );
         }
 
         public override bool IsKeyword => this == Keyword;
@@ -53,13 +56,13 @@ namespace JetBrains.ReSharper.Plugins.Spring.Spring
 
         private class LeafElement : LeafElementBase, ITokenNode
         {
-            private readonly IBuffer _buffer;
             private readonly SpringTokenType _springTokenType;
+            private readonly IBuffer _buffer;
 
-            public LeafElement(IBuffer buffer, SpringTokenType springTokenType)
+            public LeafElement(SpringTokenType springTokenType, IBuffer buffer)
             {
-                _buffer = buffer;
                 _springTokenType = springTokenType;
+                _buffer = buffer;
             }
 
             public override int GetTextLength()

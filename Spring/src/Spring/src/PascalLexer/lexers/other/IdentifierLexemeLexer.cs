@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
 using JetBrains.ReSharper.Plugins.Spring.PascalLexer.lexeme;
-using NUnit.Framework;
 
 namespace JetBrains.ReSharper.Plugins.Spring.PascalLexer.lexers.other
 {
@@ -39,6 +38,9 @@ namespace JetBrains.ReSharper.Plugins.Spring.PascalLexer.lexers.other
 
         private static readonly List<string> Keywords = new List<string>()
         {
+            "in", "is",
+            
+            
             "for",
             "if",
         };

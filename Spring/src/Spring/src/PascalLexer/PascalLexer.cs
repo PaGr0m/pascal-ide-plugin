@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.IO;
 using JetBrains.ReSharper.Plugins.Spring.PascalLexer.lexeme;
+using JetBrains.ReSharper.Plugins.Spring.PascalLexer.lexers;
 using JetBrains.ReSharper.Plugins.Spring.PascalLexer.lexers.comments;
 using JetBrains.ReSharper.Plugins.Spring.PascalLexer.lexers.numbers;
 using JetBrains.ReSharper.Plugins.Spring.PascalLexer.lexers.other;
@@ -10,7 +10,7 @@ using JetBrains.ReSharper.Plugins.Spring.Spring;
 using JetBrains.ReSharper.Psi.Parsing;
 using JetBrains.Text;
 
-namespace JetBrains.ReSharper.Plugins.Spring.PascalLexer.lexers
+namespace JetBrains.ReSharper.Plugins.Spring.PascalLexer
 {
     public class PascalLexer : ILexer
     {

@@ -13,9 +13,5 @@
     <PackageReference Include="NUnit.Console" Version="3.10.0" />
     <CsLex Include="src/Sample.lex" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="src\PascalLexer" />
-  </ItemGroup>
   <Import Project="$(DotNetSdkPath)\Build\SubplatformReference.Psi.Features_test_Framework.Props" Condition="Exists('$(DotNetSdkPath)\Build\SubplatformReference.Psi.Features_test_Framework.Props')" />
 </Project>

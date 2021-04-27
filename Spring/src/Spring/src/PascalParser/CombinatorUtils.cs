@@ -1,5 +1,3 @@
-using JetBrains.ReSharper.Plugins.Spring.PascalLexer.lexeme;
-
 namespace JetBrains.ReSharper.Plugins.Spring.PascalParser
 {
     public static class CombinatorUtils

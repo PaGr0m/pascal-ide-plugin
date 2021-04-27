@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using JetBrains.Application.Settings;
 using JetBrains.DocumentModel;
 using JetBrains.Lifetimes;
@@ -16,7 +15,7 @@ using JetBrains.ReSharper.Psi.Parsing;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.ReSharper.Psi.TreeBuilder;
 using JetBrains.Text;
-using JetBrains.Util.Logging;
+using static JetBrains.ReSharper.Plugins.Spring.PascalParser.PascalParser;
 
 namespace JetBrains.ReSharper.Plugins.Spring.Spring
 {
@@ -37,10 +36,57 @@ namespace JetBrains.ReSharper.Plugins.Spring.Spring
                 var fileMark = builder.Mark();
 
                 // ParseBlock(builder);
-                while (!builder.Eof())
+
+                var expression = new LateInitPredicate();
+
+                var factor = Alternative(
+                    Sequence(
+                        Partial(Token, SpringTokenType.SingleSpecialCharacter, "("),
+                        expression.AsPredicate,
+                        Partial(Token, SpringTokenType.SingleSpecialCharacter, ")")
+                    ),
+                    Partial(Token, SpringTokenType.Number)
+                );
+
+                var term = Sequence(
+                    factor,
+                    Many(Sequence(MultiplicationOperators, factor))
+                );
+
+                var simpleExpression = Sequence(
+                    term,
+                    Many(Sequence(AddingOperators, term))
+                );
+
+                expression.Init(Alternative(
+                    simpleExpression,
+                    Sequence(simpleExpression, LogicalOperation, simpleExpression)
+                ));
+
+
+                // Predicate<PsiBuilder> expression1 = new LateInitPredicate().AsPredicate;
+
+                // var ifToken = Partial(
+                //     Token,
+                //     SpringTokenType.Keyword,
+                //     "if"
+                // );
+                // var whitespace = Partial(
+                //     Token,
+                //     SpringTokenType.Whitespace
+                // );
+                // var pred = Sequence(ifToken, whitespace, ifToken);
+                var flag = expression.AsPredicate(builder);
+
+                if (!flag)
                 {
-                    builder.AdvanceLexer();
+                    builder.Error("Shit");
                 }
+
+                // while (!builder.Eof())
+                // {
+                //     builder.AdvanceLexer();
+                // }
 
                 builder.Done(fileMark, SpringFileNodeType.Instance, null);
                 var file = (IFile) builder.BuildTree();
@@ -48,32 +94,23 @@ namespace JetBrains.ReSharper.Plugins.Spring.Spring
             }
         }
 
-        private static IEnumerable<PsiBuilder> Psi(PsiBuilder builder)
+        class LateInitPredicate
         {
-            while (!builder.Eof())
+            private Predicate<PsiBuilder> _predicate;
+
+            public void Init(Predicate<PsiBuilder> predicate)
             {
-                yield return builder;
+                _predicate = predicate;
+            }
+
+            public bool AsPredicate(PsiBuilder builder)
+            {
+                return _predicate(builder);
             }
         }
 
         private void ParseBlock(PsiBuilder psiBuilder)
         {
-            // if (tt == CSharpTokenType.LBRACE)
-            // {
-            //     var start = builder.Mark();
-            //     builder.AdvanceLexer();
-            //     ParseBlock(builder);
-            //
-            //     if (builder.GetTokenType() != CSharpTokenType.RBRACE)
-            //         builder.Error("Expected '}'");
-            //     else
-            //         builder.AdvanceLexer();
-            //
-            //     builder.Done(start, SpringCompositeNodeType.BLOCK, null);
-            // }
-            // else if (tt == CSharpTokenType.RBRACE)
-            //     return;
-            // else builder.AdvanceLexer();
         }
     }
 

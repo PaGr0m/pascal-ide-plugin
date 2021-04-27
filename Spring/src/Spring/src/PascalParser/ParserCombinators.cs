@@ -1,37 +1,13 @@
-using System;
-using JetBrains.ReSharper.Psi.Parsing;
-using JetBrains.ReSharper.Psi.TreeBuilder;
-
 namespace JetBrains.ReSharper.Plugins.Spring.PascalParser
 {
     public class ParserCombinators
     {
-    //     private static readonly Predicate<TokenNodeType> IsIdentifier = tokenNodeType => tokenNodeType.IsIdentifier;
-    //
-    //     private static Parser<PsiBuilder, PsiBuilder> CreateParser(
-    //         Predicate<TokenNodeType> predicate,
-    //         string pattern
-    //     )
-    //     {
-    //         return Parser<PsiBuilder>.Token(builder =>
-    //         {
-    //             var mark = builder.Mark();
-    //             var predicateResult =
-    //                 predicate(builder.GetTokenType()) &&
-    //                 builder.GetTokenText() == pattern;
-    //
-    //             if (!predicateResult)
-    //             {
-    //                 builder.RollbackTo(mark);
-    //                 return false;
-    //             }
-    //
-    //             builder.Drop(mark);
-    //             builder.AdvanceLexer();
-    //
-    //             return true;
-    //         });
-    //     }
+    
+        
+        
+        
+        
+        
     //
     //     public static Parser<PsiBuilder, PsiBuilder> KeywordAnd = CreateParser(IsIdentifier, "while");
     //     public static Parser<PsiBuilder, PsiBuilder> KeywordArray = CreateParser(IsIdentifier, "while");
