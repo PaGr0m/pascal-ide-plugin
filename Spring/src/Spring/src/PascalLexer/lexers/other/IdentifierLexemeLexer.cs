@@ -38,11 +38,24 @@ namespace JetBrains.ReSharper.Plugins.Spring.PascalLexer.lexers.other
 
         private static readonly List<string> Keywords = new List<string>()
         {
-            "in", "is",
-            
-            
-            "for",
-            "if",
+            "as", "in", "is",
+
+            "not", "or", "xor",
+
+            "div", "mod", "and", "shl", "shr", "as",
+
+            "include", "exclude",
+
+            "begin", "end",
+
+            "case", "of", "otherwise",
+            "if", "then", "else",
+
+            "for", "to", "downto", "do",
+            "while",
+            "repeat", "until",
+
+            "with", "goto"
         };
     }
 }

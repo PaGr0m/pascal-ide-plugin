@@ -1,0 +1,7 @@
+begin
+    case C of  
+     a : WriteLn ('A pressed');  
+     b : WriteLn ('B pressed');  
+     c : WriteLn ('C pressed');
+    end
+end.

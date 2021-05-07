@@ -1,75 +1,101 @@
+using System;
+using System.Linq;
+using JetBrains.ReSharper.Plugins.Spring.Spring;
+using JetBrains.ReSharper.Psi.TreeBuilder;
+
 namespace JetBrains.ReSharper.Plugins.Spring.PascalParser
 {
-    public class ParserCombinators
+    public static class ParserCombinators
     {
-    
-        
-        
-        
-        
-        
-    //
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordAnd = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordArray = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordAs = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordAsm = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordBegin = CreateParser(IsIdentifier, "begin");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordBreak = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordCase = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordClass = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordConst = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordConstructor = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordContinue = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordDestructor = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordDiv = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordDo = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordDownTo = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordElse = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordEnd = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordFalse = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordFile = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordFor = CreateParser(IsIdentifier, "for");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordFunction = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordGoto = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordIf = CreateParser(IsIdentifier, "if");
-    //
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordImplementation =
-    //         CreateParser(IsIdentifier, "Implementation");
-    //
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordIn = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordInline = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordInterface = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordLabel = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordMod = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordNil = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordNot = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordObject = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordOf = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordOn = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordOperator = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordOr = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordPacked = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordPrivate = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordProcedure = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordProgram = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordProtected = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordPublic = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordRecord = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordRepeat = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordSet = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordShl = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordShr = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordString = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordThen = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordTo = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordTrue = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordType = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordUnit = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordUntil = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordUses = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordVar = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordWhile = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordWith = CreateParser(IsIdentifier, "while");
-    //     public static Parser<PsiBuilder, PsiBuilder> KeywordXor = CreateParser(IsIdentifier, "while");
+        public static bool Token(PsiBuilder builder, SpringTokenType expectedType)
+        {
+            if (builder.GetTokenType() != expectedType) return false;
+
+            builder.AdvanceLexer();
+
+            while (
+                !builder.Eof() &&
+                (builder.GetTokenType().IsWhitespace || builder.GetTokenType().IsComment)
+            )
+            {
+                builder.AdvanceLexer();
+            }
+
+            return true;
+        }
+
+        public static bool Token(PsiBuilder builder, SpringTokenType expectedType, string expectedText)
+        {
+            if (
+                builder.GetTokenType() != expectedType ||
+                builder.GetTokenText() != expectedText
+            ) return false;
+
+            builder.AdvanceLexer();
+
+            while (
+                !builder.Eof() &&
+                (builder.GetTokenType().IsWhitespace || builder.GetTokenType().IsComment)
+            )
+            {
+                builder.AdvanceLexer();
+            }
+
+            return true;
+        }
+
+        public static Predicate<PsiBuilder> Partial<TT, TR>(Func<PsiBuilder, TT, TR, bool> func, TT t, TR r) =>
+            builder => func(builder, t, r);
+
+        public static Predicate<PsiBuilder> Partial<TT>(Func<PsiBuilder, TT, bool> func, TT t) =>
+            builder => func(builder, t);
+
+        public static Predicate<PsiBuilder> Sequence(params Predicate<PsiBuilder>[] parsers) => builder =>
+        {
+            var mark = builder.Mark();
+            if (parsers.Any(predicate => !predicate(builder)))
+            {
+                builder.Drop(mark);
+                return false;
+            }
+
+            builder.Done(mark, SpringCompositeNodeType.BLOCK, null);
+            return true;
+        };
+
+        public static Predicate<PsiBuilder> Alternative(params Predicate<PsiBuilder>[] parsers) => builder =>
+        {
+            var mark = builder.Mark();
+            foreach (var predicate in parsers)
+            {
+                if (predicate(builder))
+                {
+                    builder.Done(mark, SpringCompositeNodeType.BLOCK, null);
+                    return true;
+                }
+
+                builder.RollbackTo(mark);
+                mark = builder.Mark();
+            }
+
+            builder.Drop(mark);
+            return false;
+        };
+
+        public static Predicate<PsiBuilder> Many(Predicate<PsiBuilder> parser) => builder =>
+        {
+            var mark = builder.Mark();
+            var completeMark = builder.Mark();
+            while (parser(builder))
+            {
+                builder.Drop(completeMark);
+                completeMark = builder.Mark();
+            }
+
+            builder.RollbackTo(completeMark);
+            builder.Done(mark, SpringCompositeNodeType.BLOCK, null);
+
+            return true;
+        };
     }
 }

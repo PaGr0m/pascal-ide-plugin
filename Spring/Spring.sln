@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spring", "src\Spring\Spring
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpringTests", "test\src\SpringTests\SpringTests.csproj", "{465BE399-F1C5-4B6C-A77A-79390C45F8DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParseCombinatorTest", "ParseCombinatorTest\ParseCombinatorTest.csproj", "{33898301-92F2-44D6-A1CC-6E8F97DB33CC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{465BE399-F1C5-4B6C-A77A-79390C45F8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{465BE399-F1C5-4B6C-A77A-79390C45F8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{465BE399-F1C5-4B6C-A77A-79390C45F8DB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33898301-92F2-44D6-A1CC-6E8F97DB33CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33898301-92F2-44D6-A1CC-6E8F97DB33CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33898301-92F2-44D6-A1CC-6E8F97DB33CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33898301-92F2-44D6-A1CC-6E8F97DB33CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
